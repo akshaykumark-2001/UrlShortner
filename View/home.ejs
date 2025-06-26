@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>URL Shortener</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f8;
+      color: #333;
+      padding: 40px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    form {
+      margin-bottom: 30px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 500px;
+      margin: 0 auto 40px auto;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #0077cc;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #005fa3;
+    }
+
+    p {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    a {
+      color: #0077cc;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    table {
+      width: 90%;
+      margin: 0 auto;
+      border-collapse: collapse;
+      background-color: #fff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    th, td {
+      padding: 15px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #0077cc;
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+  </style>
+</head>
+<body>
+
+  <% if (ShortId) { %>
+    <p>
+      <a href="http://localhost:4000/<%= ShortId %>">
+        http://localhost:4000/<%= ShortId %>
+      </a>
+    </p>
+  <% } %>
+
+  <form action="/url" method="post">
+    <label for="originalUrl">Enter the URL</label>
+    <input type="text" name="originalUrl" id="originalUrl" required />
+    <button type="submit">Generate</button>
+  </form>
+
+  <h1>All Shortened URLs</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Sl. No</th>
+        <th>Original Link</th>
+        <th>Short ID</th>
+        <th>Click Count</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%  allUrl.forEach((item, index) => { %>
+        <tr>
+          <td><%= index + 1 %></td>
+          <td><a href="<%= item.originalUrl %>" target="_blank"><%= item.originalUrl %></a></td>
+          <td><a href="/<%= item.ShortId %>" target="_blank"><%= item.ShortId %></a></td>
+          <td><%= item.visitHistory.length %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+
+</body>
+</html>
