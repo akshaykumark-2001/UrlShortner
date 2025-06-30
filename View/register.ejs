@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Styled Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    form {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      width: 300px;
+    }
+
+    form label {
+      display: block;
+      margin: 15px 0 5px;
+      font-weight: bold;
+    }
+
+    form input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    form input:focus {
+      border-color: #007BFF;
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+  <form action="/register" method="post">
+    <label for="username">Username</label>
+    <input type="text" id="username" name="username" />
+
+    <label for="email">Email</label>
+    <input type="text" id="email" name="email" />
+
+    <label for="password">Password</label>
+    <input type="text" id="password" name="password" />
+    <button>Submit</button>
+  </form>
+</body>
+</html>
