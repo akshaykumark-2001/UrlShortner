@@ -2,7 +2,7 @@ const express=require('express')
 const router=express.Router()
 const Url=require("../Model/UrlScheema")
 const verify=require('../MiddleWare/jwtToken')
-router.get('/',verify,async(req,res)=>{
+router.get('/',async(req,res)=>{
    try {const allUrl= await Url.find({ createdBy:req.user.id })
     res.render("home",{
         allUrl,

@@ -5,6 +5,16 @@ const createUrl=async(req,res)=>{
   try{
     const{originalUrl}=req.body;
   if(!originalUrl) return res.status(401).send('provusw an url')
+      const existing = await Url.findOne({ originalUrl, createdBy: req.user.id});
+   
+    if (existing) {
+      const allUrl = await Url.find({ createdBy: req.user.id });
+      return res.render('home', {
+        allUrl,
+        ShortId: existing.ShortId,
+        createdBy: req.user.id
+      });
+    }
   const  ShortId=nanoid(8)
   await Url.create({
      ShortId:ShortId,
@@ -28,8 +38,9 @@ catch(err){
 }
 const getUrlConroller=async(req,res)=>{
       const id=req.params.id
-
-      const newUrl= await Url.findOneAndUpdate(
+      console.log("getid :",id);
+      
+ try {    const newUrl= await Url.findOneAndUpdate(
         { ShortId:id},
         {
      $push:{  visitHistory:{
@@ -39,9 +50,16 @@ const getUrlConroller=async(req,res)=>{
         }}
       },
      { new: true }  )
+     console.log("newgetUrl:",newUrl);
+     
       if(!newUrl) return res.status(401).send("can't find the user ")
 
-    res.status(301).redirect(newUrl.originalUrl)
+    res.status(301).redirect(newUrl.originalUrl)}
+    catch(err){
+      console.log(err);
+    return res.status(401).send('error is happened')
+      
+    }
 
 }
 module.exports={
