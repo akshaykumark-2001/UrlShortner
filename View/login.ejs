@@ -40,18 +40,52 @@
       border-color: #007BFF;
       outline: none;
     }
+
+    .form-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .form-buttons button {
+      flex: 1;
+      padding: 10px;
+      margin: 0 5px;
+      border: none;
+      border-radius: 5px;
+      background-color: #007BFF;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .form-buttons button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Optional: remove side margin on first and last buttons */
+    .form-buttons button:first-child {
+      margin-left: 0;
+    }
+
+    .form-buttons button:last-child {
+      margin-right: 0;
+    }
   </style>
 </head>
 <body>
   <form action="/login" method="post">
- 
-
     <label for="email">Email</label>
-    <input type="text" id="email"  name="email" />
+    <input type="text" id="email" name="email" />
 
     <label for="password">Password</label>
     <input type="text" id="password" name="password"/>
-    <button>Submitt</button>
+
+    <div class="form-buttons">
+      <button type="submit">Submit</button>
+      <button type="button" onclick="window.location.href='/register'">Register</button>
+    </div>
   </form>
 </body>
 </html>
